@@ -1,4 +1,6 @@
 use std::{collections::HashMap, io};
+use colored::Colorize;
+
 
 fn main() {
     println!("Hi today i have for you some special task, first i ask u what text u would like to print out!");
@@ -32,8 +34,25 @@ fn main() {
     alphabet_map.insert('V', V);
     alphabet_map.insert('X', X);
     alphabet_map.insert('Y', Y);
+    alphabet_map.insert('W', W);
     alphabet_map.insert('Z', Z);
+    alphabet_map.insert('?', QUESTION_MARK);
+    alphabet_map.insert(' ', SPACE);
 
+
+    println!("Now i want to ask you what color of that text you would like to have!");
+    println!("1. red");
+    println!("2. blue");
+    println!("3. green");
+    println!("4. purple");
+    println!("5. yellow");
+
+    let mut color_from_user = String::new();
+
+    io::stdin()
+        .read_line(&mut color_from_user)
+        .expect("Failed to read line");
+      
     let word_for_print = word_from_user
         .chars()
         .take(word_from_user.len() - 1)
@@ -45,6 +64,8 @@ fn main() {
         })
         .map(|s| s.split('\n').collect::<Vec<&str>>())
         .collect::<Vec<Vec<&str>>>();
+
+      
 
     let mut result = String::new();
 
@@ -58,7 +79,16 @@ fn main() {
         result.push('\n');
     }
 
-    println!("This is your beloved word\n {}", result);
+    let colored_word = match color_from_user.as_str() {
+      "1" => result.red(),
+      "2" => result.green(),
+      "3" => result.blue(),
+      "4" => result.purple(),
+      "5" => result.yellow(),
+      _ => result.white(), // Default to white if the choice is not recognized
+  };
+
+    println!("This is your beloved word\n {}", colored_word);
 
 }
 
@@ -78,8 +108,7 @@ const B: &str = "
 ##### 
 ##  ##
 ##  ##
-##### 
-";
+##### ";
 
 const C: &str = "
 ####  
@@ -287,3 +316,31 @@ const Z: &str = "
  ##   
 ##    
 ######";
+
+const W: &str = "
+##   ##
+##   ##
+##   ##
+## # ##
+#######
+### ###
+##   ##";
+
+const QUESTION_MARK: &str = "
+####  
+##  ##
+    ##
+   ## 
+  ##  
+    
+  ##";
+
+const SPACE: &str = "
+      
+      
+      
+      
+      
+      
+      ";
+
