@@ -46,6 +46,7 @@ fn main() {
     println!("3. green");
     println!("4. purple");
     println!("5. yellow");
+    println!("6. brown");
 
     let mut color_from_user = String::new();
 
@@ -79,10 +80,10 @@ fn main() {
         result.push('\n');
     }
 
-    let colored_word = match color_from_user.as_str() {
+    let colored_word = match color_from_user.as_str().trim_end() {
       "1" => result.red(),
-      "2" => result.green(),
-      "3" => result.blue(),
+      "2" => result.blue(),
+      "3" => result.green(),
       "4" => result.purple(),
       "5" => result.yellow(),
       _ => result.white(), // Default to white if the choice is not recognized
